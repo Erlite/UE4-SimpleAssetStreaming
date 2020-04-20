@@ -5,7 +5,7 @@ Feel free to contribute to the plugin by opening issues or pull requests! A wiki
 ### What is asset streaming?
 Asset streaming is the technique of loading and unloading assets based on demand. This means you only load an asset when it is required, and unload it once nothing needs it.
 
-Once unloaded, will be valid until garbage collected, which only happens when no references to the assets are active. By default, the GC collects once every minute. I request changing it to about three seconds during development for testing (**Project Settings -> Garbage Collection -> Time Between Purging Pending Kill Objects)**.
+Once unloaded, the asset will be valid until garbage collected, which only happens when no references to the assets are active. By default, the GC collects once every minute. I request changing it to about three seconds during development for testing (**Project Settings -> Garbage Collection -> Time Between Purging Pending Kill Objects)**.
 
 ### Why use asset streaming? Doesn't UE4 already have it?
 Asset streaming reduces your memory usage since you won't just load all assets in memory at game launch. By default, UE4 loads all assets referenced by classes through direct references (i.e. pointers). While this means all assets can easily be accessed, imagine what happens when your classes reference multiple gigabytes of assets.
