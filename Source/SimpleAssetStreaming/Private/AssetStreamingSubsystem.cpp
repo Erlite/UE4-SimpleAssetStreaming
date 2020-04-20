@@ -41,7 +41,9 @@ bool UAssetStreamingSubsystem::RequestAssetStreaming(const TArray<TSoftObjectPtr
 		return false;
 	}
 
+	// Assign a new guid to the request.
 	OutAssetRequestId = FGuid::NewGuid();
+
 	UE_LOG(LogAssetStreaming, Verbose, TEXT("Request to stream %s asset(s) received. Request Id: %s"), *FString::FromInt(AssetsToStream.Num()), *OutAssetRequestId.ToString());
 	for (TSoftObjectPtr<UObject> Asset : AssetsToStream)
 	{
@@ -56,6 +58,7 @@ bool UAssetStreamingSubsystem::RequestAssetStreaming(const TSoftObjectPtr<UObjec
 {
 	CheckThis();
 
+	// Assign a new guid to the request.
 	OutAssetRequestId = FGuid::NewGuid();
 	StreamAsset(AssetToStream, OutAssetRequestId, AssetLoadedCallback);
 
