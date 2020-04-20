@@ -1,0 +1,20 @@
+# Ignore all folders but scan them
+*
+!*/
+
+# Don't ignore git files
+!/.git*
+
+# Don't ignore lfs files.
+!/.lfsconfig
+
+# Don't ignore MD files
+!/*.MD
+
+# Don't ignore plugin files
+!SimpleAssetStreaming.uplugin
+
+# Don't ignore Config, Source and Resources
+!/Config/**
+!/Resources/**
+!/Source/**
