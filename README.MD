@@ -5,6 +5,8 @@ Feel free to contribute to the plugin by opening issues or pull requests! A wiki
 ### What is asset streaming?
 Asset streaming is the technique of loading and unloading assets based on demand. This means you only load an asset when it is required, and unload it once nothing needs it.
 
+Once unloaded, will be valid until garbage collected, which only happens when no references to the assets are active. By default, the GC collects once every minute. I request changing it to about three seconds during development for testing (**Project Settings -> Garbage Collection -> Time Between Purging Pending Kill Objects)**.
+
 ### Why use asset streaming? Doesn't UE4 already have it?
 Asset streaming reduces your memory usage since you won't just load all assets in memory at game launch. By default, UE4 loads all assets referenced by classes through direct references (i.e. pointers). While this means all assets can easily be accessed, imagine what happens when your classes reference multiple gigabytes of assets.
 
@@ -87,7 +89,7 @@ FGuid ArrayRequestGuid;
 if (auto* Subsystem = UAssetStreamingSubsystem::Get())
 {
     Subsystem->RequestAssetStreaming(MySingleAsset, nullptr, SingleRequestGuid);
-    Subsystem->RequestAssetStreaming(MyArrayOfAssets, nullptr, ArrayRequestGuid);
+	Subsystem->RequestAssetStreaming(MyArrayOfAssets, nullptr, ArrayRequestGuid);
 }
 ```
 These functions will return a boolean, true if the request was successful. If the request wasn't successful, the request guid will also be invalidated.
@@ -107,7 +109,7 @@ Subsystem->RequestAssetStreaming(MySingleAsset, this, MyRequestGuid);
 // IAssetStreamingCallback implementation
 void OnAssetLoaded_Implementation(const TSoftObjectPtr<UObject>& LoadedAsset, const bool bAlreadyLoaded)
 {
-    // Your asset is loaded, hurray!
+	// Your asset is loaded, hurray!
 }
 ```
 ## Blueprint Implementation
@@ -125,4 +127,3 @@ You can then release the assets by using the `Release Assets` node and the reque
 You can implement the `AssetStreamingCallback` interface in your object's `Class Settings` and then use the `OnAssetLoaded` event which will be called for every asset requested by your object when they're loaded:
 
 ![Asset callback example](https://github.com/Erlite/UE4-SimpleAssetStreaming/blob/master/Example05.png)
-
