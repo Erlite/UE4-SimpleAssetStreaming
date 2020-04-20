@@ -140,3 +140,4 @@ You can implement the `AssetStreamingCallback` interface in your object's `Class
 - Load a lot of assets for no reason. 
 - Request/release assets for another object than your own.
 - Set the GC time before purging pending kill objects too low outside of testing, as it can cause hitches in performance.
+- Use assets without making a request, even if they're valid. They could be valid until the next GC cycle hits, which will cull them out of memory, unless a reference is made by the subsystem.
