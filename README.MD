@@ -89,7 +89,7 @@ FGuid ArrayRequestGuid;
 if (auto* Subsystem = UAssetStreamingSubsystem::Get())
 {
     Subsystem->RequestAssetStreaming(MySingleAsset, nullptr, SingleRequestGuid);
-	Subsystem->RequestAssetStreaming(MyArrayOfAssets, nullptr, ArrayRequestGuid);
+    Subsystem->RequestAssetStreaming(MyArrayOfAssets, nullptr, ArrayRequestGuid);
 }
 ```
 These functions will return a boolean, true if the request was successful. If the request wasn't successful, the request guid will also be invalidated.
@@ -109,7 +109,7 @@ Subsystem->RequestAssetStreaming(MySingleAsset, this, MyRequestGuid);
 // IAssetStreamingCallback implementation
 void OnAssetLoaded_Implementation(const TSoftObjectPtr<UObject>& LoadedAsset, const bool bAlreadyLoaded)
 {
-	// Your asset is loaded, hurray!
+    // Your asset is loaded, hurray!
 }
 ```
 ## Blueprint Implementation
@@ -127,3 +127,16 @@ You can then release the assets by using the `Release Assets` node and the reque
 You can implement the `AssetStreamingCallback` interface in your object's `Class Settings` and then use the `OnAssetLoaded` event which will be called for every asset requested by your object when they're loaded:
 
 ![Asset callback example](https://github.com/Erlite/UE4-SimpleAssetStreaming/blob/master/Example05.png)
+
+## Do's and Dont's
+
+### Do
+- Release assets when you don't need them anymore. It takes one reference to keep it active.
+- Check that the AssetStreamingSubsystem is valid, especially in `Destroyed/BeginDestroy` functions or events as these can be called when the game is closing and the subsystem will have been destroyed.
+- Make sure the request guid you received isn't invalid before trying to release assets.
+- Use the IAssetStreamingCallback interface to setup anything dependent on the loaded assets.
+
+### Don't
+- Load a lot of assets for no reason. 
+- Request/release assets for another object than your own.
+- Set the GC time before purging pending kill objects too low outside of testing, as it can cause hitches in performance.
