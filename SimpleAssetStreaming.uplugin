@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Simple Asset Streaming",
+	"Description": "Optimize your memory usage using this simple subsystem to stream assets in and out of memory only when needed.",
+	"Category": "Performance",
+	"CreatedBy": "Younes AIT AMER MEZIANE",
+	"CreatedByURL": "https://github.com/Erlite/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "SimpleAssetStreaming",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
