@@ -131,7 +131,7 @@ You can implement the `AssetStreamingCallback` interface in your object's `Class
 ## Do's and Dont's
 
 ### Do
-- Release assets when you don't need them anymore. It takes one reference to keep it active.
+- Release assets when you don't need them anymore. It takes one reference to keep them active.
 - Check that the AssetStreamingSubsystem is valid, especially in `Destroyed/BeginDestroy` functions or events as these can be called when the game is closing and the subsystem will have been destroyed.
 - Make sure the request guid you received isn't invalid before trying to release assets.
 - Use the IAssetStreamingCallback interface to setup anything dependent on the loaded assets.
