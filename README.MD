@@ -128,6 +128,8 @@ You can implement the `AssetStreamingCallback` interface in your object's `Class
 
 ![Asset callback example](https://github.com/Erlite/UE4-SimpleAssetStreaming/blob/master/Example05.png)
 
+You'll need to use the nodes that have `w/Callback` in their name to pass in an asset streaming callback in the request.
+
 ## Do's and Dont's
 
 ### Do
