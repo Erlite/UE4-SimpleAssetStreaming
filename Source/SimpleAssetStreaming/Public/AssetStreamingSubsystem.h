@@ -95,12 +95,32 @@ protected:
      * Request streaming of multiple assets.
      * Each asset will be streamed one by one.
      * @param AssetsToStream The assets to asynchronously stream.
+     * @param OutAssetRequestId The request id assigned for your request. Use it to release the assets you streamed. Invalidated if the request was invalid.
+     * @returns True if the request was successful.
+     */
+    UFUNCTION(BlueprintCallable, DisplayName = "Request Multiple Assets", Category = "Asset Streaming Functions")
+    bool K2_RequestMultipleAssetStreaming(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, FGuid& OutAssetRequestId);
+
+    /**
+     * Request streaming of multiple assets.
+     * Each asset will be streamed one by one.
+     * @param AssetsToStream The assets to asynchronously stream.
      * @param AssetLoadedCallback The callback to call when an asset is loaded. Will be called once by asset loaded.
      * @param OutAssetRequestId The request id assigned for your request. Use it to release the assets you streamed. Invalidated if the request was invalid.
      * @returns True if the request was successful.
      */
-    UFUNCTION(BlueprintCallable, DisplayName = "Request Multiple Asset Streaming", Category = "Asset Streaming Functions")
-    bool K2_RequestMultipleAssetStreaming(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId);
+    UFUNCTION(BlueprintCallable, DisplayName = "Request Multiple Assets w/Callback", Category = "Asset Streaming Functions")
+    bool K2_RequestMultipleAssetStreamingWithCallback(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId);
+
+    /**
+     * Request streaming of a single asset.
+     * @param AssetToStream The asset to asynchronously stream.
+     * @param OutAssetRequestId The request id assigned for your request. Use it to release the asset you streamed. Invalidated if the request was invalid.
+     * @returns True if the request was successful.
+     */
+    UFUNCTION(BlueprintCallable, DisplayName = "Request Asset Streaming", Category = "Asset Streaming Functions")
+    bool K2_RequestAssetStreaming(const TSoftObjectPtr<UObject>& AssetToStream, FGuid& OutAssetRequestId);
+
 
     /**
      * Request streaming of a single asset.
@@ -109,8 +129,8 @@ protected:
      * @param OutAssetRequestId The request id assigned for your request. Use it to release the asset you streamed. Invalidated if the request was invalid.
      * @returns True if the request was successful.
      */
-    UFUNCTION(BlueprintCallable, DisplayName = "Request Asset Streaming", Category = "Asset Streaming Functions")
-    bool K2_RequestAssetStreaming(const TSoftObjectPtr<UObject>& AssetToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId);
+    UFUNCTION(BlueprintCallable, DisplayName = "Request Asset Streaming w/Callback", Category = "Asset Streaming Functions")
+    bool K2_RequestAssetStreamingWithCallback(const TSoftObjectPtr<UObject>& AssetToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId);
 
     /**
      * Release the asset you streamed.

@@ -158,12 +158,22 @@ bool UAssetStreamingSubsystem::ReleaseAssets(FGuid& RequestId)
 	return true;
 }
 
-bool UAssetStreamingSubsystem::K2_RequestMultipleAssetStreaming(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId)
+bool UAssetStreamingSubsystem::K2_RequestMultipleAssetStreaming(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, FGuid& OutAssetRequestId)
+{
+	return RequestAssetStreaming(AssetsToStream, nullptr, OutAssetRequestId);
+}
+
+bool UAssetStreamingSubsystem::K2_RequestMultipleAssetStreamingWithCallback(const TArray<TSoftObjectPtr<UObject>>& AssetsToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId)
 {
 	return RequestAssetStreaming(AssetsToStream, AssetLoadedCallback, OutAssetRequestId);
 }
 
-bool UAssetStreamingSubsystem::K2_RequestAssetStreaming(const TSoftObjectPtr<UObject>& AssetToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId)
+bool UAssetStreamingSubsystem::K2_RequestAssetStreaming(const TSoftObjectPtr<UObject>& AssetToStream, FGuid& OutAssetRequestId)
+{
+	return RequestAssetStreaming(AssetToStream, nullptr, OutAssetRequestId);
+}
+
+bool UAssetStreamingSubsystem::K2_RequestAssetStreamingWithCallback(const TSoftObjectPtr<UObject>& AssetToStream, const TScriptInterface<IAssetStreamingCallback>& AssetLoadedCallback, FGuid& OutAssetRequestId)
 {
 	return RequestAssetStreaming(AssetToStream, AssetLoadedCallback, OutAssetRequestId);
 }
