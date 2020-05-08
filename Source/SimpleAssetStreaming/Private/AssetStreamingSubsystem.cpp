@@ -288,7 +288,6 @@ void UAssetStreamingSubsystem::FinalUnloadAssets(const FAssetHandleArray& Assets
 		UE_LOG(LogAssetStreaming, VeryVerbose, TEXT("Unloading asset '%s'."), *Asset.GetAssetName());
 
 		// Remove the handle from the KeepAlive array.
-		KeepAlive[AssetPath] = nullptr;
 		KeepAlive.Remove(AssetPath);
 
 		// Get the active handles for the asset and cancel them. Normally, we should only find one.
