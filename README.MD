@@ -31,7 +31,7 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 You can now compile your project to gain access to the system in C++ and Blueprints.
 
 ## Preparing your project to use asset streaming.
-You'll need to modify how you reference your assets in order to implement asset streaming. It takes as much as one direct reference to an asset for it to be loaded immediately, making asset streaming useless for it.
+You'll need to modify how you reference your assets in order to implement asset streaming. It takes as little as one direct reference to an asset for it to be loaded immediately, making asset streaming useless for it.
 
 ### C++: using `TSoftObjectPtr<>` 
 In C++, all references made to assets need to be wrapped using `TSoftObjectPtr<UObject>`.
